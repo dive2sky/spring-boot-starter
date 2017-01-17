@@ -1,0 +1,159 @@
+banner:
+  image:
+    location: banner.jpg
+
+server:
+  port: 8090
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+      - application/xml
+      - text/html
+      - text/xml
+      - text/plain
+      - application/javascript
+
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled: false
+
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+
+
+---
+spring:
+  profiles: default
+  env: local
+  url:
+    base: http://local
+
+  # Database
+  datasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  slaveDatasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach2?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  # Session-Redis
+  session:
+    redis:
+      host: "localhost"
+      port: 6379
+      timeout:  3000
+
+---
+spring:
+  profiles: sandbox
+  env: sandbox
+  url:
+    base: http://sandbox
+
+  # Database
+  # Database
+  datasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  slaveDatasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach2?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  # Session-Redis
+  session:
+    redis:
+      host: "localhost"
+      port: 6379
+      timeout:  3000
+
+logging:
+  path: /Users/sampark/workspace
+  file: admin-angular2
+---
+spring:
+  profiles: release
+  env: release
+  url:
+    base: http://release
+
+  # Session-Redis
+  session:
+    redis:
+      host: "localhost"
+      port: 6379
+      timeout: 3000
+
+  # Database
+  datasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  slaveDatasource:
+    hikari:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      jdbc-url: "jdbc:mysql://localhost/madroach2?useUnicode=true&characterEncoding=UTF-8"
+      username: "root"
+      password: "madroach"
+      maximum-pool-size: 50
+      minimum-idle: 10
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+logging:
+  path: /var/log
+  file: demoApp.log
